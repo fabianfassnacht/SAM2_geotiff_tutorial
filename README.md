@@ -36,17 +36,35 @@ As first step we will create the environment using the Anaconda prompt. You can 
 
 in the now opening command line window you will have to execute several commands. **In some cases, it will be necessary to confirm by pressing the "y" button and enter**. You will find the commands that you have to execute below. Only enter the lines of code **without** the leading # - these lines provide some information to better understand the code. 
 
-conda create --prefix E:/Python_environments/sam python=3.9
+	# create the new Python environment (at least Python version 3.9)
+	conda create --prefix E:/Python_environments/sam python=3.9
 
-conda activate E:\Python_environments\sam
+ 	# activate the just created Python environment
+	conda activate E:\Python_environments\sam
 
-conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+ 	# install pytorch, torchvision, torchaudio, as well as cuda drivers
+	conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
 
-pip install git+https://github.com/facebookresearch/segment-anything.git
+ 	# install segment anything - please be aware that this line will only work if you
+  	# have git installed. If this is not the case please download and install git
+   	# from here: https://git-scm.com/downloads
+	pip install git+https://github.com/facebookresearch/segment-anything.git
 
-conda install spyder-kernels=2.5
+ 	# install spyder and spyder kernels to work with the spyder editor (feel free to use another one
+  	# if you prefer another one - then you do not have to take this step)
+	conda install spyder
+ 	conda install spyder-kernels=2.5
+ 
 
 **Part 2: Download SAM2 checkpoint**
+
+As next step you have to download a trained version of SAM2 which in form of a so-called "checkpoint" which you can find here:
+
+[SAM 2 checkpoint download](https://github.com/facebookresearch/sam2?tab=readme-ov-file#model-description)
+
+The checkpoint used in this tutorial (downloaded from meta's page as well) can also be found here:
+
+[SAM 2 checkpoint used in this tutorial](https://drive.google.com/file/d/1R8_eZ2yI6SJHyT7P8xqZ1QZwL-La8wcK/view?usp=sharing)
 
 
 **Part 3: Load Geotiff-file and apply SAM**
