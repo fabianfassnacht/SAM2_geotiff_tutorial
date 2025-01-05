@@ -1,4 +1,4 @@
-﻿**Tutorial: How to apply SAM2 to a georeferenced geotiff-file and output the masks as vector dataset**
+*Tutorial: How to apply SAM2 to a georeferenced geotiff-file and output the masks as vector dataset*
 
 **Introduction**
 
