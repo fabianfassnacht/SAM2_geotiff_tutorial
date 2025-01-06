@@ -54,6 +54,9 @@ in the now opening command line window you will have to execute several commands
   	# if you prefer another one - then you do not have to take this step)
 	conda install spyder
  	conda install spyder-kernels=2.5
+
+  	# on computer in lab-pools it may be necessary to also install the cv2 (open cv) package:
+   	conda install -c conda-forge opencv
  
 
 **Part 2: Download SAM2 checkpoint**
