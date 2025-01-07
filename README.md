@@ -56,7 +56,7 @@ in the now opening command line window you will have to execute several commands
  	conda install spyder-kernels=2.5
 
   	# on computer in lab-pools it may be necessary to also install the cv2 (open cv) package:
-   	conda install -c conda-forge opencv
+   	conda install -c conda-forge opencv-headless
  
 
 **Part 2: Download SAM2 checkpoint**
@@ -72,10 +72,13 @@ The checkpoint used in this tutorial (downloaded from meta's page as well) can a
 
 **Part 3: Load Geotiff-file and apply SAM**
 
-blabla
-blabla
-blabla
+As next step, we run the code to load a Geotiff-file and apply SAM. For this we first of all have to make sure that all packages are installed. We can run the code below by marking the corresponding text in spyder and then press the button marked in Figure 2.
 
+![Figure 2](https://github.com/fabianfassnacht/SAM2_geotiff_tutorial/blob/main/Figures_Readme/Fig_02.png)
+
+**Figure 2**
+
+If this results in some sort of error message we will have to install the missing packages by running the lines of code that are "outcommented" with the hashtag sign below. Be aware that there are two option to install packages in Python - one is using the command "conda install packagename" and one is "!pip install packagename". Conda should always be prepared when working in a virtual Anaconda enviroment as we do at the moment. Running !pip may install the package globally, affecting the entire Conda setup and this can cause troubles not only for your current project. At the same time, in some cases there will be no option since some packages may not be available. One other trick you can apply is that you can sometimes use: ""
 
 	#pip install git+https://github.com/facebookresearch/segment-anything.git
 	#conda install shapely
