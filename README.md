@@ -37,32 +37,26 @@ As first step we will create the environment using the Anaconda prompt. You can 
 in the now opening command line window you will have to execute several commands. **In some cases, it will be necessary to confirm by pressing the "y" button and enter**. You will find the commands that you have to execute below. Only enter the lines of code **without** the leading # - these lines provide some information to better understand the code. 
 
 	# create the new Python environment (at least Python version 3.9)
-	conda create --prefix E:/Python_environments/sam python=3.9
+	conda create --prefix E:/Python_environments/sam python=3.9.21
 
  	# activate the just created Python environment
 	conda activate E:\Python_environments\sam
 
- 	# install pytorch, torchvision, torchaudio, as well as cuda drivers
-	conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
-
- 	# install segment anything - please be aware that this line will only work if you
-  	# have git installed. If this is not the case please download and install git
-   	# from here: https://git-scm.com/downloads
-	pip install git+https://github.com/facebookresearch/segment-anything.git
-
- 	# install spyder and spyder kernels to work with the spyder editor (feel free to use another one
-  	# if you prefer another one - then you do not have to take this step)
-	conda install spyder
- 	conda install spyder-kernels=2.5
-
-  	# on computer in lab-pools it may be necessary to also install the cv2 (open cv) package:
-   	conda install -c conda-forge opencv-headless
+   	# on computer in lab-pools it may be necessary to also install the cv2 (open cv) package:
     	conda install -c conda-forge opencv
-
      	conda install shapely
 	conda install geopandas
  	conda install rasterio
 	conda install matplotlib
+
+ 	# install pytorch, torchvision, torchaudio, as well as cuda drivers
+	conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+
+ 	# install spyder to work with the spyder editor (feel free to use another one
+  	# if you prefer another one - then you do not have to take this step)
+	conda install spyder
+
+
      
  
 
