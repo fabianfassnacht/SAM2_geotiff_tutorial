@@ -2,16 +2,19 @@
 
 **Introduction**
 
-Hello and welcome to this tutorial which will focus on providing a work-flow to apply meta's SAM2 model to remote sensing data in the **tif-format** and store the results of SAM2 as gepreferenced vector dataset (Shapefile or geopackage).
+Hello and welcome to this tutorial which will focus on providing a work-flow to apply meta's SAM2 model to remote sensing data in the **tif-format** and store the results of SAM2 as georeferenced vector dataset (Shapefile or geopackage).
 
 It will cover all steps from setting-up a Python environment, to installing SAM2 and then apply SAM2 to a very high resolution satellite image and store the results as a vector file.
 
 The python-file required to run the Tutorial can be found here:
 
+[Python file](https://github.com/facebookresearch/sam2/blob/main/notebooks/automatic_mask_generator_example.ipynb)
 
 The image used in the Tutorial can be downloaded here:
 
+[Satellite image](https://github.com/facebookresearch/sam2/blob/main/notebooks/automatic_mask_generator_example.ipynb)
 
+Be aware that depending on the power of your computer and the avaialability of a GPU, this image (even though it is quite small) might need a long time on your computer to be processed by SAM. You can also use any other geotiff-file you have available and in case you have a slow computer, it might be best to work with a really small subset.
 
 The code to apply SAM2 losely bases on the official tutorial of meta for applying SAM2:
 
@@ -36,20 +39,22 @@ As first step we will create the environment using the Anaconda prompt. You can 
 
 in the now opening command line window you will have to execute several commands. **In some cases, it will be necessary to confirm by pressing the "y" button and enter**. You will find the commands that you have to execute below. Only enter the lines of code **without** the leading # - these lines provide some information to better understand the code. 
 
-	# create the new Python environment (at least Python version 3.9)
+	# create the new Python environment (at least Python version 3.9.21) - you will have to adapt the path according
+ 	# to your computer
 	conda create --prefix E:/Python_environments/sam python=3.9.21
 
  	# activate the just created Python environment
-	conda activate E:\Python_environments\sam
+	conda activate E:/Python_environments/sam
 
-   	# on computer in lab-pools it may be necessary to also install the cv2 (open cv) package:
+   	# it may be necessary to also install the cv2 (open cv) package and several other 
+    	# auxiliary Python packages:
     	conda install -c conda-forge opencv
      	conda install shapely
 	conda install geopandas
  	conda install rasterio
 	conda install matplotlib
 
- 	# install pytorch, torchvision, torchaudio, as well as cuda drivers
+ 	# other key packages include pytorch, torchvision, torchaudio, as well as cuda drivers
 	conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
 
  	# install spyder to work with the spyder editor (feel free to use another one
@@ -79,10 +84,14 @@ As next step, we run the code to load a Geotiff-file and apply SAM. For this we 
 
 **Figure 2**
 
-If this results in some sort of error message we will have to install the missing packages by running the lines of code that are "outcommented" with the hashtag sign below. Be aware that there are two option to install packages in Python - one is using the command "conda install packagename" and one is "!pip install packagename". Conda should always be prepared when working in a virtual Anaconda enviroment as we do at the moment. Running !pip may install the package globally, affecting the entire Conda setup and this can cause troubles not only for your current project. At the same time, in some cases there will be no option since some packages may not be available. One other trick you can apply is that you can sometimes use: ""
+If this results in some sort of error message we will have to install the missing packages by running the lines of code that are "outcommented" with the hashtag sign below. Be aware that there are two option to install packages in Python - one is using the command "conda install packagename" and one is "!pip install packagename". Conda should always be prepared when working in a virtual Anaconda enviroment as we do at the moment. Running !pip may install the package globally, affecting the entire Conda setup and this can cause troubles not only for your current project. At the same time, in some cases there will be no option since some packages may not be available. One other trick you can apply is that you can sometimes use the additional "conda-forge" attribute which then also searches for packages outside of the "officially approved" conda packages. Some community built packages and most recent versions of packages can only be found using this argument.
 
-	#pip install git+https://github.com/facebookresearch/segment-anything.git
 
+Next we will have to install segment-anything from meta using:
+
+	pip install git+https://github.com/facebookresearch/segment-anything.git
+
+Then we call all required packages:
 
 	import numpy as np
 	import torch
@@ -96,9 +105,7 @@ If this results in some sort of error message we will have to install the missin
 	from affine import Affine
 
 
-blabla
-blabla
-blabla
+Next we define a function that allows to plot the input image along with the masks created by SAM.
 	
 	# prepare function to plot masks over original image
 	def show_anns(anns):
@@ -116,9 +123,7 @@ blabla
 	        img[m] = color_mask
 	    ax.imshow(img)
 
-blabla
-blabla
-blabla
+Now we load the tif-file and plot it.
 
 	###############################################
 	# load geotiff-file and plot it
@@ -140,11 +145,14 @@ blabla
 	plt.axis('off')
 	plt.show()
 
+
+To be able to process the tif-file with SAM, we need to make sure that it is stored in the right data type format. So in this case we have to transform the image from a unsigned integer with 16 bit (uint16) to one with 8 bit (uint8)
+
 	# Normalize raster to uint8 if needed
 	if rgb_image.dtype == np.uint16:
 	    rgb_image = cv2.normalize(rgb_image, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
 
-
+Now we load the SAM package and the checkpoint (that is a trained version of the SAM algorithm) - for this we have to define the path on our computer to where we have saved the checkpoint you downloaded from the link provided above.
 
 	###############################################
 	# load SAM2
@@ -163,9 +171,8 @@ blabla
 	sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
 	sam.to(device=device)
 
-blabla
-blabla
-blabla
+
+Now we are almost ready to apply the SAM model to our image. We now have the option to change some settings of the SAM algorithm.
 
 	###############################################
 	# adjust settings of SAM and apply it to image
@@ -182,11 +189,11 @@ blabla
 	)
 
 
+Then we apply the model with the following code - this process can now take up to several minutes. If you check the task manager of your computer, you will see that either your CPU or GPU will be very busy.
+
 	masks2 = mask_generator_2.generate(rgb_image)
 
-blabla
-blabla
-blabla
+Once this code has run successfully, you can plot the results running this code:
 
 	plt.figure(figsize=(20,20))
 	plt.imshow(image)
@@ -194,9 +201,8 @@ blabla
 	plt.axis('off')
 	plt.show() 
 
-blabla
-blabla
-blabla
+As last step, we can now save the created mask as geocoded vector-files to the harddisc. For this we use the following code:
+
 
 	# Initialize list to store polygons
 	polygons = []
@@ -229,7 +235,7 @@ blabla
 	                polygons.append(geo_polygon)
 
 
-
+You can either save as Shapefile or geopackage or in both data formats:
 
 	# Create GeoDataFrame with CRS from the raster
 	gdf = gpd.GeoDataFrame(geometry=polygons, crs=crs)
@@ -238,3 +244,6 @@ blabla
 	output_path = 'E:/8_SAM_tutorial/'
 	gdf.to_file(f"{output_path}/output_geocoded1.gpkg", driver="GPKG")
 	gdf.to_file(f"{output_path}/output_geocoded1.shp")
+
+
+We can now have a look at the data in QGIS or another GIS environment. 
