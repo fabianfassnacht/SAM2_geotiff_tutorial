@@ -180,10 +180,7 @@ Now we load the SAM package and the checkpoint (that is a trained version of the
 	sam.to(device=device)
 
 
-Now we are almost ready to apply the SAM model to our image. We now have the option to change some settings of the SAM algorithm. I asked ChatGPT for some explanations of the settings and these are as follows:
-
-
-Here’s an explanation of the parameters in the `SAM2AutomaticMaskGenerator` initialization:
+Now we are almost ready to apply the SAM model to our image. We now have the option to change some settings of the SAM algorithm. I asked ChatGPT for some explanations of the settings and these are as shown below. Be aware that we do not use all of the parameters in the code below and that some settings have different values then written in the explanations below:
 
 ### **Parameters**
 
@@ -260,6 +257,7 @@ Here’s an explanation of the parameters in the `SAM2AutomaticMaskGenerator` in
 ### **Summary**
 These parameters configure the **mask generation process** in SAM2, balancing **quality**, **stability**, and **computational efficiency**. Adjusting these allows tailoring the segmentation process to the needs of your application, whether prioritizing speed, accuracy, or memory usage.
 
+---
 
 	###############################################
 	# adjust settings of SAM and apply it to image
@@ -267,13 +265,14 @@ These parameters configure the **mask generation process** in SAM2, balancing **
 
 	mask_generator_2 = SamAutomaticMaskGenerator(
 	    model=sam,
-	    points_per_side=32,
+	    points_per_side=64,
 	    pred_iou_thresh=0.86,
 	    stability_score_thresh=0.92,
 	    crop_n_layers=1,
 	    crop_n_points_downscale_factor=2,
 	    min_mask_region_area=20,  # Requires open-cv to run post-processing
 	)
+
 
 
 Then we apply the model with the following code - this process can now take up to several minutes. If you check the task manager of your computer, you will see that either your CPU or GPU will be very busy.
@@ -287,6 +286,13 @@ Once this code has run successfully, you can plot the results running this code:
 	show_anns(masks2)
 	plt.axis('off')
 	plt.show() 
+
+This should lead to a plot that looks similar to this (depending on the settings you applied):
+
+![Figure 4](https://github.com/fabianfassnacht/SAM2_geotiff_tutorial/blob/main/Images/SAM_04.png)
+
+**Figure 4**
+
 
 As last step, we can now save the created mask as geocoded vector-files to the harddisc. For this we use the following code:
 
