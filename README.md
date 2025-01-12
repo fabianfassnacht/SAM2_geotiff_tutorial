@@ -339,4 +339,8 @@ You can either save as Shapefile or geopackage or in both data formats:
 	gdf.to_file(f"{output_path}/output_geocoded1.shp")
 
 
-We can now have a look at the data in QGIS or another GIS environment. 
+We can now have a look at the data in QGIS or another GIS environment. In the plot below, I changed the visualization settings by giving each polygon an own color and setting the opacity to 35%.
+
+![Figure 5](https://github.com/fabianfassnacht/SAM2_geotiff_tutorial/blob/main/Images/SAM_05.png)
+
+**Figure 5**
