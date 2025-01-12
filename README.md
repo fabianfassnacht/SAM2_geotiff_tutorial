@@ -80,7 +80,7 @@ The checkpoint used in this tutorial (downloaded from meta's page as well) can a
 
 As next step, we run the code to load a Geotiff-file and apply SAM. For this we first of all have to make sure that all packages are installed. We can run the code below by marking the corresponding text in spyder and then press the button marked in Figure 2.
 
-![Figure 2](https://github.com/fabianfassnacht/SAM2_geotiff_tutorial/blob/main/Figures_Readme/Fig_02.png)
+![Figure 2](https://github.com/fabianfassnacht/SAM2_geotiff_tutorial/blob/main/Images/SAM_02.png)
 
 **Figure 2**
 
