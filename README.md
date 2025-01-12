@@ -12,7 +12,7 @@ The python-file required to run the Tutorial can be found here:
 
 The image used in the Tutorial can be downloaded here:
 
-[Satellite image](https://github.com/facebookresearch/sam2/blob/main/notebooks/automatic_mask_generator_example.ipynb)
+[Satellite image](https://drive.google.com/file/d/1n5ilJE9S2d4xz8PyGXb92syWXu5DuJ19/view?usp=sharing)
 
 Be aware that depending on the power of your computer and the avaialability of a GPU, this image (even though it is quite small) might need a long time on your computer to be processed by SAM. You can also use any other geotiff-file you have available and in case you have a slow computer, it might be best to work with a really small subset.
 
