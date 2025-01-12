@@ -8,7 +8,7 @@ It will cover all steps from setting-up a Python environment, to installing SAM2
 
 The python-file required to run the Tutorial can be found here:
 
-[Python file](https://github.com/facebookresearch/sam2/blob/main/notebooks/automatic_mask_generator_example.ipynb)
+[Python file](https://github.com/fabianfassnacht/SAM2_geotiff_tutorial/tree/main/Python_code)
 
 The image used in the Tutorial can be downloaded here:
 
