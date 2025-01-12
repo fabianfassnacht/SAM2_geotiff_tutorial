@@ -84,7 +84,7 @@ As next step, we run the code to load a Geotiff-file and apply SAM. For this we 
 
 **Figure 2**
 
-If this results in some sort of error message we will have to install the missing packages by running the lines of code that are "outcommented" with the hashtag sign below. Be aware that there are two option to install packages in Python - one is using the command "conda install packagename" and one is "!pip install packagename". Conda should always be prepared when working in a virtual Anaconda enviroment as we do at the moment. Running !pip may install the package globally, affecting the entire Conda setup and this can cause troubles not only for your current project. At the same time, in some cases there will be no option since some packages may not be available. One other trick you can apply is that you can sometimes use the additional "conda-forge" attribute which then also searches for packages outside of the "officially approved" conda packages. Some community built packages and most recent versions of packages can only be found using this argument.
+If this results in some sort of error message we will have to install the missing packages by running the lines of code that are "outcommented" with the hashtag sign below. Normally, this should not be the case since we installed all packages already in the Anaconda prompt above - except for the SAM packages which we will need to install for sure. Be aware that there are two option to install packages in Python - one is using the command "conda install packagename" (works in Anaconda prompt only as far as I know) and one is "!pip install packagename". Conda should always be prepared when working in a virtual Anaconda enviroment as we do at the moment since the package will then only be installed in the current environment. Running !pip may install the package globally, affecting the entire Conda setup and this can cause troubles not only for your current project and environment. At the same time, in some cases there will be no option since some packages may not be available with the conda command. One other trick you can apply is that you can sometimes use the additional "conda-forge" attribute which then also searches for packages outside of the "officially approved" conda packages. Some community built packages and most recent versions of packages can only be found using this argument.
 
 
 Next we will have to install segment-anything from meta using:
@@ -104,6 +104,9 @@ Then we call all required packages:
 	from rasterio.transform import rowcol
 	from affine import Affine
 
+If you forgot to install some packages you could run for example this code to install the shapely package - but see warning above:
+
+	#!pip install shapely
 
 Next we define a function that allows to plot the input image along with the masks created by SAM.
 	
@@ -145,6 +148,11 @@ Now we load the tif-file and plot it.
 	plt.axis('off')
 	plt.show()
 
+This should result in the following plot if you change to the "Plots window in Spyder":
+
+![Figure 3](https://github.com/fabianfassnacht/SAM2_geotiff_tutorial/blob/main/Images/SAM_03.png)
+
+**Figure 3**
 
 To be able to process the tif-file with SAM, we need to make sure that it is stored in the right data type format. So in this case we have to transform the image from a unsigned integer with 16 bit (uint16) to one with 8 bit (uint8)
 
