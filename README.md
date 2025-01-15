@@ -89,7 +89,7 @@ If this results in some sort of error message we will have to install the missin
 
 Next we will have to install segment-anything from meta using:
 
-	pip install git+https://github.com/facebookresearch/segment-anything.git
+	!pip install git+https://github.com/facebookresearch/segment-anything.git
 
 Then we call all required packages:
 
@@ -173,7 +173,10 @@ Now we load the SAM package and the checkpoint (that is a trained version of the
 
 	sam_checkpoint = "E:/Python_environments/sam_checkpoint/sam_vit_h_4b8939.pth"
 	model_type = "vit_h"
-	device = "cuda"
+
+ 	# if you do not have a GPU in your computer the second line of code should be activated
+  	device = "cuda"
+   	#device = "cpu"
 
 	# prepare model for application
 	sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
