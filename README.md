@@ -40,18 +40,19 @@ As first step we will create the environment using the Anaconda prompt. You can 
 in the now opening command line window you will have to execute several commands. **In some cases, it will be necessary to confirm by pressing the "y" button and enter**. You will find the commands that you have to execute below. Only enter the lines of code **without** the leading # - these lines provide some information to better understand the code. 
 
 	# create the new Python environment (at least Python version 3.9.21) - you will have to adapt the path according
- 	# to your computer
+	# to your computer
 	conda create --prefix E:/Python_environments/sam python=3.9.21
-
- 	# activate the just created Python environment
+	
+	# activate the just created Python environment
 	conda activate E:/Python_environments/sam
-
-   	# it may be necessary to also install the cv2 (open cv) package and several other 
-    	# auxiliary Python packages:
-    	conda install -c conda-forge opencv
-     	conda install shapely
+	
+	# it may be necessary to also install the cv2 (open cv) package and several other 
+	    	
+	# auxiliary Python packages:
+	conda install -c conda-forge opencv
+	conda install shapely
 	conda install geopandas
- 	conda install rasterio
+	conda install rasterio
 	conda install matplotlib
 
  	# other key packages include pytorch, torchvision, torchaudio, as well as cuda drivers
